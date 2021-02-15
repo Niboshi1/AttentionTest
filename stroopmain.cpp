@@ -6,8 +6,10 @@
 
 StroopMain::StroopMain()
 {
+    QPixmap initialPix("C:/Users/Coral/Pictures/Stroop_test/fixation.JPG");
+    pixWait = initialPix;
     testMode = true; // when true, answer color of words
-    this->initializeImages();
+    initializeImages();
 }
 
 QStringList StroopMain::loadImagesets(QString dirName)
@@ -24,7 +26,7 @@ QStringList StroopMain::loadImagesets(QString dirName)
 
 void StroopMain::initializeImages()
 {
-    this->imagePathsColors = loadImagesets("C:/Users/Coral/Pictures/Stroop_test/colors");
+    imagePathsColors = loadImagesets("C:/Users/Coral/Pictures/Stroop_test/colors");
     pixInstructionColor = QPixmap("C:/Users/Coral/Pictures/Stroop_test/instruction/answer_color.JPG");
     pixInstructionWord = QPixmap("C:/Users/Coral/Pictures/Stroop_test/instruction/answer_word.JPG");
 }
@@ -40,7 +42,7 @@ void StroopMain::choosePix()
 
     //Display cue image
     QPixmap cueColor(imagePathsColors[pixIdxColor]);
-    this->pixColor = cueColor;
+    pixColor = cueColor;
 
     // Debug
     //qDebug() << targetColorName;

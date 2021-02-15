@@ -14,7 +14,7 @@ public:
     void initializeImages();
     void choosePix();
 
-    //QPixmap pixWait;
+    QPixmap pixWait;
     QPixmap pixColor;
     QPixmap pixInstructionColor;
     QPixmap pixInstructionWord;

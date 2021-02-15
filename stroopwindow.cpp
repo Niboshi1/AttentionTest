@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QElapsedTimer>
 #include <QDir>
+#include <QDateTime>
 
 StroopWindow::StroopWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,12 +21,17 @@ StroopWindow::StroopWindow(QWidget *parent) :
     this->installEventFilter(this);
     ui->pushButton_quit->installEventFilter(this);
 
+    // Savefile directory
+    QDateTime dt = QDateTime::currentDateTime();
+    saveFile = QDir::currentPath() + "/data/" +
+            dt.toString("yyyyMMddhhmm") + "_stroop.csv";
+
     // Accept inputs
     acceptArrows = false;
 
     // Load initial image
     waitForKey = false;
-    changeMode();
+    pix = QPixmap("C:/Users/Coral/Pictures/count/waiting.JPG");
 }
 
 StroopWindow::~StroopWindow()
@@ -41,8 +47,9 @@ bool StroopWindow::eventFilter(QObject* obj, QEvent* event)
     // if waiting for start
     if (waitForKey)
     {
-        stroopSession();
         waitForKey = false;
+        countDown();
+        return true;
     }
 
     // if waiting for arrow key input
@@ -54,13 +61,14 @@ bool StroopWindow::eventFilter(QObject* obj, QEvent* event)
         if (acceptArrows)
         {
             acceptArrows = false;
-            reactionTime << timer.elapsed();
-            if (keyEvent->key() == Qt::Key_Left) answeredArrow << "Left";
-            if (keyEvent->key() == Qt::Key_Right) answeredArrow << "Right";
-            if (keyEvent->key() == Qt::Key_Up) answeredArrow << "Up";
-            if (keyEvent->key() == Qt::Key_Down) answeredArrow << "Down";
-            pixNames << stroopMain->targetColorName;
-            stroopRule << stroopMain->testMode;
+            if (keyEvent->key() == Qt::Key_Left) answeredArrow = "Left";
+            if (keyEvent->key() == Qt::Key_Right) answeredArrow = "Right";
+            if (keyEvent->key() == Qt::Key_Up) answeredArrow = "Up";
+            if (keyEvent->key() == Qt::Key_Down) answeredArrow = "Down";
+            saveResult(stroopMain->testMode,
+                       answeredArrow,
+                       stroopMain->targetColorName,
+                       timer.elapsed());
             stroopSession();
             return true;
         } else {
@@ -87,14 +95,95 @@ void StroopWindow::resizeEvent(QResizeEvent *event)
     QWidget::resizeEvent(event);
 }
 
+void StroopWindow::startSession()
+{
+    ui->label_pic->setPixmap(pix.scaled(ui->label_pic->width(),
+                                        ui->label_pic->height(),
+                                        Qt::KeepAspectRatio));
+    waitForKey = true;
+}
+
+void StroopWindow::countDown()
+{
+    QPixmap count1("C:/Users/Coral/Pictures/count/count1.JPG");
+    QPixmap count2("C:/Users/Coral/Pictures/count/count2.JPG");
+    QPixmap count3("C:/Users/Coral/Pictures/count/count3.JPG");
+    // 3
+    ui->label_pic->setPixmap(count3.scaled(ui->label_pic->width(),
+                                           ui->label_pic->height(),
+                                           Qt::KeepAspectRatio));
+    ui->label_pic->repaint();
+    qApp->processEvents();
+    QThread::msleep(1000);
+
+    //2
+    ui->label_pic->setPixmap(count2.scaled(ui->label_pic->width(),
+                                           ui->label_pic->height(),
+                                           Qt::KeepAspectRatio));
+    ui->label_pic->repaint();
+    qApp->processEvents();
+    QThread::msleep(1000);
+
+    //1
+    ui->label_pic->setPixmap(count1.scaled(ui->label_pic->width(),
+                                           ui->label_pic->height(),
+                                           Qt::KeepAspectRatio));
+    ui->label_pic->repaint();
+    qApp->processEvents();
+    QThread::msleep(1000);
+
+    // Show fixation
+    ui->label_pic->setPixmap(stroopMain->pixWait.scaled(ui->label_pic->width(),
+                                                        ui->label_pic->height(),
+                                                        Qt::KeepAspectRatio));
+    ui->label_pic->repaint();
+    qApp->processEvents();
+
+    changeMode();
+}
+
+void StroopWindow::changeMode() {
+    QPixmap pixRule;
+    if (stroopMain->testMode) {
+        pixRule = stroopMain->pixInstructionColor;
+    } else {
+        pixRule = stroopMain->pixInstructionWord;
+    }
+
+    // Set instruction image
+    ui->label_pic->setPixmap(pixRule.scaled(ui->label_pic->width(),
+                                        ui->label_pic->height(),
+                                        Qt::KeepAspectRatio));
+    ui->label_pic->repaint();
+    qApp->processEvents();
+
+    // Start settsion
+    QThread::msleep(3000);
+    stroopSession();
+
+}
+
 void StroopWindow::stroopSession()
 {
 
     // Grab new image dataset
     stroopMain->choosePix();
 
-    // Show cue
-    ui->label_pic->setPixmap(stroopMain->pixColor.scaled(ui->label_pic->width(), ui->label_pic->height(), Qt::KeepAspectRatio));
+    // Show fixation
+    ui->label_pic->setPixmap(stroopMain->pixWait.scaled(ui->label_pic->width(),
+                                                         ui->label_pic->height(),
+                                                         Qt::KeepAspectRatio));
+    ui->label_pic->repaint();
+    qApp->processEvents();
+
+    // Duration of fixation
+    int fixationWait = rand() % (1600-400 + 1) + 400; // time to display fixation (400-1600 ms)
+    QThread::msleep(fixationWait);
+
+    // Show color image
+    ui->label_pic->setPixmap(stroopMain->pixColor.scaled(ui->label_pic->width(),
+                                                         ui->label_pic->height(),
+                                                         Qt::KeepAspectRatio));
     ui->label_pic->repaint();
     qApp->processEvents();
 
@@ -102,64 +191,20 @@ void StroopWindow::stroopSession()
     timer.start(); // continues until an arrow key is entered
 }
 
-void StroopWindow::changeMode() {
-    if (stroopMain->testMode) {
-        pix = stroopMain->pixInstructionColor;
-    } else {
-        pix = stroopMain->pixInstructionWord;
-    }
-
-    // Set instruction image
-    ui->label_pic->setPixmap(pix.scaled(ui->label_pic->width(), ui->label_pic->height(), Qt::KeepAspectRatio));
-    ui->label_pic->setScaledContents(true);
-    waitForKey = true;
-
-}
-
-void StroopWindow::saveResult()
+void StroopWindow::saveResult(bool rule,
+                              QString pixName,
+                              QString arrow,
+                              qint64 reactionTime)
 {
-    QString filePath = QDir::currentPath() + "/data/test_stroop.csv";
-
-    QFile data(filePath);
-    if(data.open(QFile::WriteOnly |QFile::Truncate))
+    QFile data(saveFile);
+    if(data.open(QFile::WriteOnly |QIODevice::Append))
     {
         QTextStream output(&data);
-
-        // Add stroop rule data
-        for (int i = 0; i < stroopRule.length(); i++)
-        {
-            output << stroopRule[i] << ",";
-        }
-        output << "\n";
-
-        // Add answeredArrow data
-        for (int i = 0; i < answeredArrow.length(); i++)
-        {
-            output << answeredArrow[i] << ",";
-        }
-        output << "\n";
-
-        // Add pixNames data
-        for (int i = 0; i < pixNames.length(); i++)
-        {
-            output << pixNames[i] << ",";
-        }
-        output << "\n";
-
-        // Add reactionTime data
-        for (int i = 0; i < reactionTime.length(); i++)
-        {
-            output << reactionTime[i] << ",";
-        }
+        output << rule << "," << pixName << "," << arrow << "," << reactionTime << "\n";
     }
 }
 
 void StroopWindow::on_pushButton_quit_clicked()
 {
-    saveResult();
-    qDebug() << stroopRule;
-    qDebug() << answeredArrow;
-    qDebug() << pixNames;
-    qDebug() << reactionTime;
     close();
 }

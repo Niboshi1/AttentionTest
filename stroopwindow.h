@@ -17,25 +17,28 @@ public:
     explicit StroopWindow(QWidget *parent = nullptr);
     ~StroopWindow();
 
-    void stroopSession();
-    void saveResult();
-    void changeMode();
-    bool acceptArrows;
+
+    void startSession();
+
 
 private slots:
     void on_pushButton_quit_clicked();
 
 private:
+    void countDown();
+    void changeMode();
+    void stroopSession();
+    void saveResult(bool, QString, QString, qint64);
+
     Ui::StroopWindow *ui;
     QPixmap pix;
     StroopMain *stroopMain;
-    QStringList pixNames;
-    QStringList answeredArrow;
-    QList<bool> stroopRule;
-    QList<qint64> reactionTime;
+    QString answeredArrow;
     QElapsedTimer timer;
     bool waitForKey;
+    bool acceptArrows;
 
+    QString saveFile;
 
 protected:
     void resizeEvent(QResizeEvent *event);

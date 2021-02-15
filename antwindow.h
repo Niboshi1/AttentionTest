@@ -17,9 +17,9 @@ public:
     explicit ANTWindow(QWidget *parent = nullptr);
     ~ANTWindow();
 
+    void startSession();
     void antSession();
-    void antSessionWait();
-    void saveResult();
+    void saveResult(QString, QString, qint64);
     bool acceptArrows;
 
 signals:
@@ -29,10 +29,13 @@ private:
     Ui::ANTWindow *ui;
     QPixmap pix;
     ANTMain *antMain;
-    QStringList pixNames;
-    QStringList answeredArrow;
-    QList<qint64> reactionTime;
+    QString answeredArrow;
     QElapsedTimer timer;
+
+    QString saveFile;
+    bool waitForKey;
+
+    void countDown();
 
 protected:
     void resizeEvent(QResizeEvent *event);
