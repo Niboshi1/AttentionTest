@@ -42,6 +42,7 @@ bool ANTWindow::eventFilter(QObject* obj, QEvent* event)
     if (keyEvent->key() == Qt::Key_Left || keyEvent->key() == Qt::Key_Right) {
         if (acceptArrows)
         {
+            acceptArrows = false;
             reactionTime << timer.elapsed();
             if (keyEvent->key() == Qt::Key_Left) answeredArrow << "Left";
             if (keyEvent->key() == Qt::Key_Right) answeredArrow << "Right";
@@ -98,10 +99,7 @@ void ANTWindow::antSession()
 
 void ANTWindow::antSessionWait()
 {
-    acceptArrows = false;
-
     // Show fixed cross
-    QThread::msleep(300);
     ui->label_pic->setPixmap(antMain->pixWait.scaled(ui->label_pic->width(), ui->label_pic->height(), Qt::KeepAspectRatio));
     ui->label_pic->repaint();
     qApp->processEvents();
@@ -112,7 +110,7 @@ void ANTWindow::antSessionWait()
 
 void ANTWindow::saveResult()
 {
-    QString filePath = QDir::currentPath() + "/data/test.csv";
+    QString filePath = QDir::currentPath() + "/data/test_ant.csv";
 
     QFile data(filePath);
     if(data.open(QFile::WriteOnly |QFile::Truncate))

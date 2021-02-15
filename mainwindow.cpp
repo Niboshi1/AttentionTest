@@ -34,9 +34,17 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_ant_clicked()
 {
     //hide(); // hide MainWindow
-    ant_window = new ANTWindow(this);
-    ant_window->showFullScreen();
-    ant_window->antSession();
+    antWindow = new ANTWindow(this);
+    antWindow->showFullScreen();
+    antWindow->antSession();
+}
+
+void MainWindow::on_pushButton_stroop_clicked()
+{
+    //hide(); // hide MainWindow
+    stroopWindow = new StroopWindow(this);
+    stroopWindow->showFullScreen();
+    stroopWindow->changeMode();
 }
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)

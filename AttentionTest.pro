@@ -12,16 +12,21 @@ SOURCES += \
     antmain.cpp \
     antwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    stroopmain.cpp \
+    stroopwindow.cpp
 
 HEADERS += \
     antmain.h \
     antwindow.h \
-    mainwindow.h
+    mainwindow.h \
+    stroopmain.h \
+    stroopwindow.h
 
 FORMS += \
     antwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    stroopwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
