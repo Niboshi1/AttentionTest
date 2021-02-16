@@ -1,0 +1,45 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>img/ANT_test/arrows/L_cong_bot.JPG</file>
+        <file>img/ANT_test/arrows/L_cong_top.JPG</file>
+        <file>img/ANT_test/arrows/L_incg_bot.JPG</file>
+        <file>img/ANT_test/arrows/L_incg_top.JPG</file>
+        <file>img/ANT_test/arrows/L_neut_bot.JPG</file>
+        <file>img/ANT_test/arrows/L_neut_top.JPG</file>
+        <file>img/ANT_test/arrows/R_cong_bot.JPG</file>
+        <file>img/ANT_test/arrows/R_cong_top.JPG</file>
+        <file>img/ANT_test/arrows/R_incg_bot.JPG</file>
+        <file>img/ANT_test/arrows/R_incg_top.JPG</file>
+        <file>img/ANT_test/arrows/R_neut_bot.JPG</file>
+        <file>img/ANT_test/arrows/R_neut_top.JPG</file>
+        <file>img/ANT_test/cue/cue0_non.JPG</file>
+        <file>img/ANT_test/cue/cue1_cnt.JPG</file>
+        <file>img/ANT_test/cue/cue2_dbl.JPG</file>
+        <file>img/ANT_test/cue/cue3_top.JPG</file>
+        <file>img/ANT_test/cue/cue4_bot.JPG</file>
+        <file>img/ANT_test/fixation.JPG</file>
+        <file>img/count/count1.JPG</file>
+        <file>img/count/count2.JPG</file>
+        <file>img/count/count3.JPG</file>
+        <file>img/count/waiting.JPG</file>
+        <file>img/Stroop_test/colors/bb.JPG</file>
+        <file>img/Stroop_test/colors/bg.JPG</file>
+        <file>img/Stroop_test/colors/br.JPG</file>
+        <file>img/Stroop_test/colors/by.JPG</file>
+        <file>img/Stroop_test/colors/gb.JPG</file>
+        <file>img/Stroop_test/colors/gg.JPG</file>
+        <file>img/Stroop_test/colors/gr.JPG</file>
+        <file>img/Stroop_test/colors/gy.JPG</file>
+        <file>img/Stroop_test/colors/rb.JPG</file>
+        <file>img/Stroop_test/colors/rg.JPG</file>
+        <file>img/Stroop_test/colors/rr.JPG</file>
+        <file>img/Stroop_test/colors/ry.JPG</file>
+        <file>img/Stroop_test/colors/yb.JPG</file>
+        <file>img/Stroop_test/colors/yg.JPG</file>
+        <file>img/Stroop_test/colors/yr.JPG</file>
+        <file>img/Stroop_test/colors/yy.JPG</file>
+        <file>img/Stroop_test/instruction/answer_color.JPG</file>
+        <file>img/Stroop_test/instruction/answer_word.JPG</file>
+        <file>img/Stroop_test/fixation.JPG</file>
+    </qresource>
+</RCC>
