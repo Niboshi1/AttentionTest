@@ -6,7 +6,7 @@
 
 ANTMain::ANTMain()
 {
-    QPixmap initialPix("C:/Users/Coral/Pictures/ANT_test/fixation.JPG");
+    QPixmap initialPix(":/resources/img/ANT_test/fixation.JPG");
     pixWait = initialPix;
     initializeImages();
 }
@@ -25,8 +25,8 @@ QStringList ANTMain::loadImagesets(QString dirName)
 
 void ANTMain::initializeImages()
 {
-    imagePathsArrow = loadImagesets("C:/Users/Coral/Pictures/ANT_test/arrows");
-    imagePathsCue = loadImagesets("C:/Users/Coral/Pictures/ANT_test/cue");
+    imagePathsArrow = loadImagesets(":/resources/img/ANT_test/arrows/");
+    imagePathsCue = loadImagesets(":/resources/img/ANT_test/cue");
 }
 
 void ANTMain::choosePix()

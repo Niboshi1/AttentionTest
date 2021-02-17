@@ -6,7 +6,7 @@
 
 StroopMain::StroopMain()
 {
-    QPixmap initialPix("C:/Users/Coral/Pictures/Stroop_test/fixation.JPG");
+    QPixmap initialPix(":/resources/img/Stroop_test/fixation.JPG");
     pixWait = initialPix;
     testMode = true; // when true, answer color of words
     initializeImages();
@@ -26,9 +26,9 @@ QStringList StroopMain::loadImagesets(QString dirName)
 
 void StroopMain::initializeImages()
 {
-    imagePathsColors = loadImagesets("C:/Users/Coral/Pictures/Stroop_test/colors");
-    pixInstructionColor = QPixmap("C:/Users/Coral/Pictures/Stroop_test/instruction/answer_color.JPG");
-    pixInstructionWord = QPixmap("C:/Users/Coral/Pictures/Stroop_test/instruction/answer_word.JPG");
+    imagePathsColors = loadImagesets(":/resources/img/Stroop_test/colors");
+    pixInstructionColor = QPixmap(":/resources/img/Stroop_test/instruction/answer_color.JPG");
+    pixInstructionWord = QPixmap(":/resources/img/Stroop_test/instruction/answer_word.JPG");
 }
 
 void StroopMain::choosePix()

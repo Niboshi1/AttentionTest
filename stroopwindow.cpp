@@ -31,7 +31,7 @@ StroopWindow::StroopWindow(QWidget *parent) :
 
     // Load initial image
     waitForKey = false;
-    pix = QPixmap("C:/Users/Coral/Pictures/count/waiting.JPG");
+    pix = QPixmap(":/resources/img/count/waiting.JPG");
 }
 
 StroopWindow::~StroopWindow()
@@ -105,9 +105,9 @@ void StroopWindow::startSession()
 
 void StroopWindow::countDown()
 {
-    QPixmap count1("C:/Users/Coral/Pictures/count/count1.JPG");
-    QPixmap count2("C:/Users/Coral/Pictures/count/count2.JPG");
-    QPixmap count3("C:/Users/Coral/Pictures/count/count3.JPG");
+    QPixmap count1(":/resources/img/count/count1.JPG");
+    QPixmap count2(":/resources/img/count/count2.JPG");
+    QPixmap count3(":/resources/img/count/count3.JPG");
     // 3
     ui->label_pic->setPixmap(count3.scaled(ui->label_pic->width(),
                                            ui->label_pic->height(),
