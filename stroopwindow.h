@@ -28,7 +28,7 @@ private:
     void countDown();
     void changeMode();
     void stroopSession();
-    void saveResult(bool, QString, QString, qint64);
+    void saveResult(int, QString, QString, qint64);
 
     Ui::StroopWindow *ui;
     QPixmap pix;
@@ -39,6 +39,12 @@ private:
     bool acceptArrows;
 
     QString saveFile;
+    int testMode;
+
+    int countPixShown;
+    int numPixShow;
+
+    bool checkInput(QString, QString);
 
 protected:
     void resizeEvent(QResizeEvent *event);

@@ -55,12 +55,21 @@ bool ANTWindow::eventFilter(QObject* obj, QEvent* event)
         if (acceptArrows)
         {
             acceptArrows = false;
-            if (keyEvent->key() == Qt::Key_Left) answeredArrow = "Left";
-            if (keyEvent->key() == Qt::Key_Right) answeredArrow = "Right";
-            saveResult(antMain->targetArrowName,
-                       answeredArrow,
-                       timer.elapsed());
-            antSession();
+            if (keyEvent->key() == Qt::Key_Left) answeredArrow = "L";
+            if (keyEvent->key() == Qt::Key_Right) answeredArrow = "R";
+            if (!(antMain->targetArrowName.contains(answeredArrow))){
+                saveResult(antMain->targetCueName,
+                           antMain->targetArrowName,
+                           answeredArrow,
+                           timer.elapsed());
+                acceptArrows = true;
+            } else {
+                saveResult(antMain->targetCueName,
+                           antMain->targetArrowName,
+                           answeredArrow,
+                           timer.elapsed());
+                antSession();
+            }
             return true;
         } else {
             event->ignore();
@@ -128,6 +137,11 @@ void ANTWindow::antSession()
     // Grab new image dataset
     antMain->choosePix();
 
+    // Wait until dataset is chosen
+    while(!antMain->pixChosen) {
+        QThread::msleep(100);
+    }
+
     // Show fixation
     ui->label_pic->setPixmap(antMain->pixWait.scaled(ui->label_pic->width(),
                                                      ui->label_pic->height(),
@@ -168,15 +182,16 @@ void ANTWindow::antSession()
     timer.start(); // continues until an arrow key is entered
 }
 
-void ANTWindow::saveResult(QString pixName,
+void ANTWindow::saveResult(QString cue,
                            QString arrow,
+                           QString pixName,
                            qint64 reactionTime)
 {
     QFile data(saveFile);
     if(data.open(QFile::WriteOnly |QIODevice::Append))
     {
         QTextStream output(&data);
-        output << pixName << "," << arrow << "," << reactionTime << "\n";
+        output << cue << "," << arrow << "," << pixName << "," << reactionTime << "\n";
     }
 }
 

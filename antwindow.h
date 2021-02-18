@@ -19,7 +19,7 @@ public:
 
     void startSession();
     void antSession();
-    void saveResult(QString, QString, qint64);
+    void saveResult(QString, QString, QString, qint64);
     bool acceptArrows;
 
 signals:
