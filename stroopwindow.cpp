@@ -66,16 +66,29 @@ bool StroopWindow::eventFilter(QObject* obj, QEvent* event)
         if (acceptArrows)
         {
             acceptArrows = false;
-            if (keyEvent->key() == Qt::Key_Left) answeredArrow = "Left";
-            if (keyEvent->key() == Qt::Key_Right) answeredArrow = "Right";
-            if (keyEvent->key() == Qt::Key_Up) answeredArrow = "Up";
-            if (keyEvent->key() == Qt::Key_Down) answeredArrow = "Down";
-            saveResult(testMode,
-                       answeredArrow,
-                       stroopMain->targetColorName,
-                       timer.elapsed());
-            stroopSession();
-            return true;
+            if (keyEvent->key() == Qt::Key_Left) answeredArrow = "yellow";
+            if (keyEvent->key() == Qt::Key_Right) answeredArrow = "blue";
+            if (keyEvent->key() == Qt::Key_Up) answeredArrow = "red";
+            if (keyEvent->key() == Qt::Key_Down) answeredArrow = "green";
+            if (!checkInput(stroopMain->targetColorName, answeredArrow)) {
+                // if a miss, do nothing
+                saveResult(testMode,
+                           answeredArrow,
+                           stroopMain->targetColorName,
+                           timer.elapsed());
+                acceptArrows = true;
+                return true;
+            }
+            else {
+                // if a hit, got to next session
+                saveResult(testMode,
+                           answeredArrow,
+                           stroopMain->targetColorName,
+                           timer.elapsed());
+                stroopSession();
+                return true;
+            }
+
         } else {
             event->ignore();
             return true;
@@ -201,6 +214,13 @@ void StroopWindow::stroopSession()
         acceptArrows = true;
         timer.start(); // continues until an arrow key is entered
     }
+}
+
+bool StroopWindow::checkInput(QString pixName, QString color)
+{
+    if (pixName.contains(color)) {
+        return true;
+    } else return false;
 }
 
 void StroopWindow::saveResult(int rule,

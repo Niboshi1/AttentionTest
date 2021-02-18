@@ -8,6 +8,7 @@ ANTMain::ANTMain()
 {
     QPixmap initialPix(":/resources/img/ANT_test/fixation.JPG");
     pixWait = initialPix;
+    pixChosen = false;
     initializeImages();
 }
 
@@ -31,6 +32,7 @@ void ANTMain::initializeImages()
 
 void ANTMain::choosePix()
 {
+    pixChosen = false;
     QStringList arrowPixFile;
 
     // Get random cue
@@ -47,9 +49,13 @@ void ANTMain::choosePix()
     targetCueName = file;
 
     // Choose which arrow to show
-    if (file == "cue3_top.JPG") arrowPixFile = imagePathsArrow.filter("top");
-    else if (file == "cue4_bot.JPG") arrowPixFile = imagePathsArrow.filter("bot");
-    else arrowPixFile = imagePathsArrow;
+    if (file == "cue3_top.JPG") {
+        arrowPixFile = imagePathsArrow.filter("top");
+    } else if (file == "cue4_bot.JPG") {
+        arrowPixFile = imagePathsArrow.filter("bot");
+    } else {
+        arrowPixFile = imagePathsArrow;
+    }
 
     int pixIdxArrow = rand() % arrowPixFile.count();
     const QFileInfo infoArrow(arrowPixFile[pixIdxArrow]);
@@ -66,6 +72,9 @@ void ANTMain::choosePix()
     // Debug
     //qDebug() << file;
     //qDebug() << arrowPixFile;
-    qDebug() << imagePathsCue[pixIdxCue];
-    qDebug() << arrowPixFile[pixIdxArrow];
+    qDebug() << targetCueName;
+    qDebug() << targetArrowName;
+    qDebug() << arrowPixFile;
+
+    pixChosen = true;
 }

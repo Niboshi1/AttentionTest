@@ -44,6 +44,8 @@ private:
     int countPixShown;
     int numPixShow;
 
+    bool checkInput(QString, QString);
+
 protected:
     void resizeEvent(QResizeEvent *event);
     bool eventFilter(QObject* obj, QEvent* event);

@@ -55,13 +55,21 @@ bool ANTWindow::eventFilter(QObject* obj, QEvent* event)
         if (acceptArrows)
         {
             acceptArrows = false;
-            if (keyEvent->key() == Qt::Key_Left) answeredArrow = "Left";
-            if (keyEvent->key() == Qt::Key_Right) answeredArrow = "Right";
-            saveResult(antMain->targetCueName,
-                       antMain->targetArrowName,
-                       answeredArrow,
-                       timer.elapsed());
-            antSession();
+            if (keyEvent->key() == Qt::Key_Left) answeredArrow = "L";
+            if (keyEvent->key() == Qt::Key_Right) answeredArrow = "R";
+            if (!(antMain->targetArrowName.contains(answeredArrow))){
+                saveResult(antMain->targetCueName,
+                           antMain->targetArrowName,
+                           answeredArrow,
+                           timer.elapsed());
+                acceptArrows = true;
+            } else {
+                saveResult(antMain->targetCueName,
+                           antMain->targetArrowName,
+                           answeredArrow,
+                           timer.elapsed());
+                antSession();
+            }
             return true;
         } else {
             event->ignore();
@@ -128,6 +136,11 @@ void ANTWindow::antSession()
 {
     // Grab new image dataset
     antMain->choosePix();
+
+    // Wait until dataset is chosen
+    while(!antMain->pixChosen) {
+        QThread::msleep(100);
+    }
 
     // Show fixation
     ui->label_pic->setPixmap(antMain->pixWait.scaled(ui->label_pic->width(),

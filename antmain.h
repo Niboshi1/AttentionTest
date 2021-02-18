@@ -16,8 +16,11 @@ public:
     QPixmap pixWait;
     QPixmap pixCue;
     QPixmap pixArrow;
+
     QString targetArrowName;
     QString targetCueName;
+
+    bool pixChosen;
 
 private:
     QStringList imagePathsArrow;
