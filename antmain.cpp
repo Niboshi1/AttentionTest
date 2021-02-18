@@ -35,8 +35,16 @@ void ANTMain::choosePix()
 
     // Get random cue
     int pixIdxCue = rand() % imagePathsCue.count();
-    const QFileInfo infoCue(imagePathsCue[pixIdxCue]);
-    const QString file(infoCue.fileName());
+    QFileInfo infoCue(imagePathsCue[pixIdxCue]);
+    QString file(infoCue.fileName());
+
+    // if file is same as previous
+    while (targetCueName==file){
+        int pixIdxCue = rand() % imagePathsCue.count();
+        infoCue = imagePathsCue[pixIdxCue];
+        file = infoCue.fileName();
+    }
+    targetCueName = file;
 
     // Choose which arrow to show
     if (file == "cue3_top.JPG") arrowPixFile = imagePathsArrow.filter("top");

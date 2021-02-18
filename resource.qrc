@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/resources">
+        <file>img/ANT_test/fixation.JPG</file>
         <file>img/ANT_test/arrows/L_cong_bot.JPG</file>
         <file>img/ANT_test/arrows/L_cong_top.JPG</file>
         <file>img/ANT_test/arrows/L_incg_bot.JPG</file>
@@ -17,29 +18,36 @@
         <file>img/ANT_test/cue/cue2_dbl.JPG</file>
         <file>img/ANT_test/cue/cue3_top.JPG</file>
         <file>img/ANT_test/cue/cue4_bot.JPG</file>
-        <file>img/ANT_test/fixation.JPG</file>
         <file>img/count/count1.JPG</file>
         <file>img/count/count2.JPG</file>
         <file>img/count/count3.JPG</file>
         <file>img/count/waiting.JPG</file>
-        <file>img/Stroop_test/colors/bb.JPG</file>
-        <file>img/Stroop_test/colors/bg.JPG</file>
-        <file>img/Stroop_test/colors/br.JPG</file>
-        <file>img/Stroop_test/colors/by.JPG</file>
-        <file>img/Stroop_test/colors/gb.JPG</file>
-        <file>img/Stroop_test/colors/gg.JPG</file>
-        <file>img/Stroop_test/colors/gr.JPG</file>
-        <file>img/Stroop_test/colors/gy.JPG</file>
-        <file>img/Stroop_test/colors/rb.JPG</file>
-        <file>img/Stroop_test/colors/rg.JPG</file>
-        <file>img/Stroop_test/colors/rr.JPG</file>
-        <file>img/Stroop_test/colors/ry.JPG</file>
-        <file>img/Stroop_test/colors/yb.JPG</file>
-        <file>img/Stroop_test/colors/yg.JPG</file>
-        <file>img/Stroop_test/colors/yr.JPG</file>
-        <file>img/Stroop_test/colors/yy.JPG</file>
+        <file>img/Stroop_test/colorPatch/bluePatch.JPG</file>
+        <file>img/Stroop_test/colorPatch/greenPatch.JPG</file>
+        <file>img/Stroop_test/colorPatch/redPatch.JPG</file>
+        <file>img/Stroop_test/colorPatch/yellowPatch.JPG</file>
+        <file>img/Stroop_test/colorWords/blueBcword.JPG</file>
+        <file>img/Stroop_test/colorWords/blueGcword.JPG</file>
+        <file>img/Stroop_test/colorWords/blueRcword.JPG</file>
+        <file>img/Stroop_test/colorWords/blueYcword.JPG</file>
+        <file>img/Stroop_test/colorWords/greenBcword.JPG</file>
+        <file>img/Stroop_test/colorWords/greenGcword.JPG</file>
+        <file>img/Stroop_test/colorWords/greenRcword.JPG</file>
+        <file>img/Stroop_test/colorWords/greenYcword.JPG</file>
+        <file>img/Stroop_test/colorWords/redBcword.JPG</file>
+        <file>img/Stroop_test/colorWords/redGcword.JPG</file>
+        <file>img/Stroop_test/colorWords/redRcword.JPG</file>
+        <file>img/Stroop_test/colorWords/redYcword.JPG</file>
+        <file>img/Stroop_test/colorWords/yellowBcword.JPG</file>
+        <file>img/Stroop_test/colorWords/yellowGcword.JPG</file>
+        <file>img/Stroop_test/colorWords/yellowRcword.JPG</file>
+        <file>img/Stroop_test/colorWords/yellowYcword.JPG</file>
         <file>img/Stroop_test/instruction/answer_color.JPG</file>
+        <file>img/Stroop_test/instruction/answer_cword.JPG</file>
         <file>img/Stroop_test/instruction/answer_word.JPG</file>
-        <file>img/Stroop_test/fixation.JPG</file>
+        <file>img/Stroop_test/words/blueWord.JPG</file>
+        <file>img/Stroop_test/words/greenWord.JPG</file>
+        <file>img/Stroop_test/words/redWord.JPG</file>
+        <file>img/Stroop_test/words/yellowWord.JPG</file>
     </qresource>
 </RCC>

@@ -18,14 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton_ant->setFixedSize(buttonSize);
     ui->pushButton_stroop->setFixedSize(buttonSize);
 
-    ui->label->setAlignment(Qt::AlignBottom | Qt::AlignLeft);
-
-    // Create result folder
-    QString dirRsult = QDir::currentPath() + "/data";
-    if (!QDir(dirRsult).exists())
-    {
-        QDir().mkdir(dirRsult);
-    }
+    ui->label->setAlignment(Qt::AlignBottom | Qt::AlignRight);
 }
 
 MainWindow::~MainWindow()

@@ -12,19 +12,19 @@ public:
 
     QStringList loadImagesets(QString dirName);
     void initializeImages();
-    void choosePix();
+    void choosePix(int testmode);
 
-    QPixmap pixWait;
     QPixmap pixColor;
     QPixmap pixInstructionColor;
     QPixmap pixInstructionWord;
+    QPixmap pixInstructionCword;
 
     QString targetColorName;
 
-    bool testMode;
-
 private:
-    QStringList imagePathsColors;
+    QStringList imagePathsPatch;
+    QStringList imagePathsWords;
+    QStringList imagePathsCwords;
 };
 
 #endif // STROOPMAIN_H

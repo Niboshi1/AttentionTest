@@ -31,7 +31,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Quit</string>
+       <string>戻る</string>
       </property>
      </widget>
     </item>

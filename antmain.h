@@ -17,10 +17,12 @@ public:
     QPixmap pixCue;
     QPixmap pixArrow;
     QString targetArrowName;
+    QString targetCueName;
 
 private:
     QStringList imagePathsArrow;
     QStringList imagePathsCue;
+
 };
 
 #endif // ANTMAIN_H

@@ -29,6 +29,11 @@ StroopWindow::StroopWindow(QWidget *parent) :
     // Accept inputs
     acceptArrows = false;
 
+    // Mode count
+    numPixShow = 10;
+    countPixShown = numPixShow;
+    testMode = 0;
+
     // Load initial image
     waitForKey = false;
     pix = QPixmap(":/resources/img/count/waiting.JPG");
@@ -65,7 +70,7 @@ bool StroopWindow::eventFilter(QObject* obj, QEvent* event)
             if (keyEvent->key() == Qt::Key_Right) answeredArrow = "Right";
             if (keyEvent->key() == Qt::Key_Up) answeredArrow = "Up";
             if (keyEvent->key() == Qt::Key_Down) answeredArrow = "Down";
-            saveResult(stroopMain->testMode,
+            saveResult(testMode,
                        answeredArrow,
                        stroopMain->targetColorName,
                        timer.elapsed());
@@ -132,22 +137,17 @@ void StroopWindow::countDown()
     qApp->processEvents();
     QThread::msleep(1000);
 
-    // Show fixation
-    ui->label_pic->setPixmap(stroopMain->pixWait.scaled(ui->label_pic->width(),
-                                                        ui->label_pic->height(),
-                                                        Qt::KeepAspectRatio));
-    ui->label_pic->repaint();
-    qApp->processEvents();
-
     changeMode();
 }
 
 void StroopWindow::changeMode() {
     QPixmap pixRule;
-    if (stroopMain->testMode) {
+    if (testMode==0) {
         pixRule = stroopMain->pixInstructionColor;
-    } else {
+    } else if (testMode==1) {
         pixRule = stroopMain->pixInstructionWord;
+    } else if (testMode==2) {
+        pixRule = stroopMain->pixInstructionCword;
     }
 
     // Set instruction image
@@ -165,33 +165,45 @@ void StroopWindow::changeMode() {
 
 void StroopWindow::stroopSession()
 {
+    // Check session number
+    if (countPixShown==0) {
+        //initialize
+        countPixShown=numPixShow;
+        switch (testMode) {
+                case 0:
+                    testMode = 1;
+                    startSession();
+                    break;
+                case 1:
+                    testMode = 2;
+                    startSession();
+                    break;
+                case 2:
+                    close();
+                    break;
+                default:
+                    break;
+            }
+    } else {
+        // Decrement number
+        countPixShown--;
 
-    // Grab new image dataset
-    stroopMain->choosePix();
+        // Grab new image dataset
+        stroopMain->choosePix(testMode);
 
-    // Show fixation
-    ui->label_pic->setPixmap(stroopMain->pixWait.scaled(ui->label_pic->width(),
-                                                         ui->label_pic->height(),
-                                                         Qt::KeepAspectRatio));
-    ui->label_pic->repaint();
-    qApp->processEvents();
+        // Show color image
+        ui->label_pic->setPixmap(stroopMain->pixColor.scaled(ui->label_pic->width(),
+                                                             ui->label_pic->height(),
+                                                             Qt::KeepAspectRatio));
+        ui->label_pic->repaint();
+        qApp->processEvents();
 
-    // Duration of fixation
-    int fixationWait = rand() % (1600-400 + 1) + 400; // time to display fixation (400-1600 ms)
-    QThread::msleep(fixationWait);
-
-    // Show color image
-    ui->label_pic->setPixmap(stroopMain->pixColor.scaled(ui->label_pic->width(),
-                                                         ui->label_pic->height(),
-                                                         Qt::KeepAspectRatio));
-    ui->label_pic->repaint();
-    qApp->processEvents();
-
-    acceptArrows = true;
-    timer.start(); // continues until an arrow key is entered
+        acceptArrows = true;
+        timer.start(); // continues until an arrow key is entered
+    }
 }
 
-void StroopWindow::saveResult(bool rule,
+void StroopWindow::saveResult(int rule,
                               QString pixName,
                               QString arrow,
                               qint64 reactionTime)

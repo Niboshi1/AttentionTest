@@ -6,9 +6,6 @@
 
 StroopMain::StroopMain()
 {
-    QPixmap initialPix(":/resources/img/Stroop_test/fixation.JPG");
-    pixWait = initialPix;
-    testMode = true; // when true, answer color of words
     initializeImages();
 }
 
@@ -26,23 +23,39 @@ QStringList StroopMain::loadImagesets(QString dirName)
 
 void StroopMain::initializeImages()
 {
-    imagePathsColors = loadImagesets(":/resources/img/Stroop_test/colors");
+    imagePathsPatch = loadImagesets(":/resources/img/Stroop_test/colorPatch");
+    imagePathsWords = loadImagesets(":/resources/img/Stroop_test/words");
+    imagePathsCwords = loadImagesets(":/resources/img/Stroop_test/colorWords");
     pixInstructionColor = QPixmap(":/resources/img/Stroop_test/instruction/answer_color.JPG");
     pixInstructionWord = QPixmap(":/resources/img/Stroop_test/instruction/answer_word.JPG");
+    pixInstructionCword = QPixmap(":/resources/img/Stroop_test/instruction/answer_cword.JPG");
 }
 
-void StroopMain::choosePix()
+void StroopMain::choosePix(int testmode)
 {
     QStringList colorPixFile;
 
+    if (testmode==0){
+        colorPixFile = imagePathsPatch;
+    } else if (testmode==1) {
+        colorPixFile = imagePathsWords;
+    } else if (testmode==2) {
+        colorPixFile = imagePathsCwords;
+    }
+
     // Get random cue
-    int pixIdxColor = rand() % imagePathsColors.count();
-    const QFileInfo infoCue(imagePathsColors[pixIdxColor]);
+    int pixIdxColor = rand() % colorPixFile.count();
+    QFileInfo infoCue(colorPixFile[pixIdxColor]);
+
+    while (targetColorName == infoCue.fileName()) {
+        pixIdxColor = rand() % colorPixFile.count();
+        infoCue = colorPixFile[pixIdxColor];
+    }
     targetColorName = infoCue.fileName();
 
     //Display cue image
-    QPixmap cueColor(imagePathsColors[pixIdxColor]);
-    pixColor = cueColor;
+    QPixmap pixDisplay(colorPixFile[pixIdxColor]);
+    pixColor = pixDisplay;
 
     // Debug
     //qDebug() << targetColorName;

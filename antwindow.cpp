@@ -57,7 +57,8 @@ bool ANTWindow::eventFilter(QObject* obj, QEvent* event)
             acceptArrows = false;
             if (keyEvent->key() == Qt::Key_Left) answeredArrow = "Left";
             if (keyEvent->key() == Qt::Key_Right) answeredArrow = "Right";
-            saveResult(antMain->targetArrowName,
+            saveResult(antMain->targetCueName,
+                       antMain->targetArrowName,
                        answeredArrow,
                        timer.elapsed());
             antSession();
@@ -168,15 +169,16 @@ void ANTWindow::antSession()
     timer.start(); // continues until an arrow key is entered
 }
 
-void ANTWindow::saveResult(QString pixName,
+void ANTWindow::saveResult(QString cue,
                            QString arrow,
+                           QString pixName,
                            qint64 reactionTime)
 {
     QFile data(saveFile);
     if(data.open(QFile::WriteOnly |QIODevice::Append))
     {
         QTextStream output(&data);
-        output << pixName << "," << arrow << "," << reactionTime << "\n";
+        output << cue << "," << arrow << "," << pixName << "," << reactionTime << "\n";
     }
 }
 
