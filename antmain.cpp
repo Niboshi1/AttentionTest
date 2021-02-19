@@ -12,69 +12,62 @@ ANTMain::ANTMain()
     initializeImages();
 }
 
-QStringList ANTMain::loadImagesets(QString dirName)
-{
-    QDir dir(dirName);
-    QStringList imagePaths;
-    qDebug() << "Loading from: " << dirName;
-    QStringList fileNames = dir.entryList(QStringList() << "*.jpg" << "*.JPG", QDir::Files);
-    for (int i=0; i<fileNames.count(); i++)
-        imagePaths << dir.absoluteFilePath(fileNames[i]);
-
-    return imagePaths;
-}
-
 void ANTMain::initializeImages()
 {
-    imagePathsArrow = loadImagesets(":/resources/img/ANT_test/arrows/");
-    imagePathsCue = loadImagesets(":/resources/img/ANT_test/cue");
+    imagePathsArrow = {QPixmap(":/resources/img/ANT_test/arrows/L_cong_top.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/R_cong_top.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/L_incg_top.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/R_incg_top.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/L_neut_top.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/R_neut_top.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/L_cong_bot.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/R_cong_bot.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/L_incg_bot.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/R_incg_bot.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/L_neut_bot.JPG"),
+                       QPixmap(":/resources/img/ANT_test/arrows/R_neut_bot.JPG")};
+
+    imagePathsCue = {QPixmap(":/resources/img/ANT_test/cue/cue0_non.JPG"),
+                     QPixmap(":/resources/img/ANT_test/cue/cue1_cnt.JPG"),
+                     QPixmap(":/resources/img/ANT_test/cue/cue2_dbl.JPG"),
+                     QPixmap(":/resources/img/ANT_test/cue/cue3_top.JPG"),
+                     QPixmap(":/resources/img/ANT_test/cue/cue4_bot.JPG")};
 }
 
 void ANTMain::choosePix()
 {
     pixChosen = false;
-    QStringList arrowPixFile;
+    int pixIdxArrowTmp;
+    int pixIdxCueTmp = rand() % 5;
 
     // Get random cue
-    int pixIdxCue = rand() % imagePathsCue.count();
-    QFileInfo infoCue(imagePathsCue[pixIdxCue]);
-    QString file(infoCue.fileName());
+    while (pixIdxCue == pixIdxCueTmp) pixIdxCueTmp = rand() % 5;
+    pixIdxCue = pixIdxCueTmp;
 
-    // if file is same as previous
-    while (targetCueName==file){
-        int pixIdxCue = rand() % imagePathsCue.count();
-        infoCue = imagePathsCue[pixIdxCue];
-        file = infoCue.fileName();
+    switch(pixIdxCue)
+    {
+    case 3 :
+        pixIdxArrowTmp = rand() % 6;
+        while (pixIdxArrow == pixIdxArrowTmp) pixIdxArrowTmp = rand() % 6;
+        pixIdxArrow = pixIdxArrowTmp;
+        break;
+    case 4 :
+        pixIdxArrowTmp = rand() % 6 + 6;
+        while (pixIdxArrow == pixIdxArrowTmp) pixIdxArrowTmp = rand() % 6 + 6;
+        pixIdxArrow = pixIdxArrowTmp;
+        break;
+    default:
+        pixIdxArrowTmp = rand() % 12;
+        while (pixIdxArrow == pixIdxArrowTmp) pixIdxArrowTmp = rand() % 12;
+        pixIdxArrow = pixIdxArrowTmp;
+        break;
     }
-    targetCueName = file;
 
-    // Choose which arrow to show
-    if (file == "cue3_top.JPG") {
-        arrowPixFile = imagePathsArrow.filter("top");
-    } else if (file == "cue4_bot.JPG") {
-        arrowPixFile = imagePathsArrow.filter("bot");
+    if (pixIdxArrow % 2) {
+        correctArrow = "R";
     } else {
-        arrowPixFile = imagePathsArrow;
+        correctArrow = "L";
     }
-
-    int pixIdxArrow = rand() % arrowPixFile.count();
-    const QFileInfo infoArrow(arrowPixFile[pixIdxArrow]);
-    targetArrowName =  infoArrow.fileName();
-
-    //Display cue image
-    QPixmap cuePix(imagePathsCue[pixIdxCue]);
-    pixCue = cuePix;
-
-    //Display arrow image
-    QPixmap arrowPix(arrowPixFile[pixIdxArrow]);
-    pixArrow = arrowPix;
-
-    // Debug
-    //qDebug() << file;
-    //qDebug() << arrowPixFile;
-    qDebug() << targetCueName;
-    qDebug() << targetArrowName;
-    qDebug() << arrowPixFile;
 
     pixChosen = true;
 }

@@ -18,9 +18,6 @@ public:
     ~ANTWindow();
 
     void startSession();
-    void antSession();
-    void saveResult(QString, QString, QString, qint64);
-    bool acceptArrows;
 
 signals:
     void inputReceived();
@@ -28,14 +25,29 @@ signals:
 private:
     Ui::ANTWindow *ui;
     QPixmap pix;
-    ANTMain *antMain;
-    QString answeredArrow;
-    QElapsedTimer timer;
-
+    QVector<QPixmap> imagePathsArrow;
+    QVector<QPixmap> imagePathsCue;
     QString saveFile;
+
+    QElapsedTimer timer;
+    QElapsedTimer timerAll;
+    QString answeredArrow;
+    QString correctArrow;
+
     bool waitForKey;
+    bool acceptArrows;
+    bool pixChosen;
+
+    void initializeImages();
 
     void countDown();
+    void choosePix();
+    void antSession();
+    void saveResult(int, int, QString, qint64, qint64);
+
+    QPixmap pixWait;
+    int pixIdxCue;
+    int pixIdxArrow;
 
 protected:
     void resizeEvent(QResizeEvent *event);

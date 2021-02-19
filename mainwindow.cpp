@@ -30,7 +30,7 @@ void MainWindow::on_pushButton_ant_clicked()
 {
     //hide(); // hide MainWindow
     antWindow = new ANTWindow(this);
-    antWindow->showFullScreen();
+    antWindow->showMaximized();
     antWindow->startSession();
 }
 
