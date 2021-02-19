@@ -20,10 +20,7 @@ ANTWindow::ANTWindow(QWidget *parent) :
     this->installEventFilter(this);
     ui->pushButton_quit->installEventFilter(this);
 
-    // Savefile directory
-    QDateTime dt = QDateTime::currentDateTime();
-    saveFile = QDir::currentPath() + "/data/" +
-            dt.toString("yyyyMMddhhmm") + "_ant.csv";
+
 
     // Accept inputs
     acceptArrows = false;
@@ -94,6 +91,11 @@ bool ANTWindow::eventFilter(QObject* obj, QEvent* event)
 
 void ANTWindow::startSession()
 {
+    // Savefile directory
+    QDateTime dt = QDateTime::currentDateTime();
+    saveFile = QDir::currentPath() + "/data/" + userID + "_" +
+            dt.toString("yyyyMMddhhmm") + "_ant.csv";
+
     ui->label_pic->setPixmap(pix.scaled(ui->label_pic->width(),
                                         ui->label_pic->height(),
                                         Qt::KeepAspectRatio));

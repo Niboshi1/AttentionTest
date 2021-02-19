@@ -18,6 +18,7 @@ public:
     ~ANTWindow();
 
     void startSession();
+    QString userID;
 
 signals:
     void inputReceived();

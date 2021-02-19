@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     antmain.cpp \
     antwindow.cpp \
+    logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
     stroopmain.cpp \
@@ -19,12 +20,14 @@ SOURCES += \
 HEADERS += \
     antmain.h \
     antwindow.h \
+    logindialog.h \
     mainwindow.h \
     stroopmain.h \
     stroopwindow.h
 
 FORMS += \
     antwindow.ui \
+    logindialog.ui \
     mainwindow.ui \
     stroopwindow.ui
 

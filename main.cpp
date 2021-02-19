@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "logindialog.h"
 
 #include <QApplication>
 #include <QDir>
@@ -6,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    LoginDialog w;
 
     // Create result folder
     QString dirRsult = QDir::currentPath() + "/data";

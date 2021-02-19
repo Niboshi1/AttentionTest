@@ -49,5 +49,7 @@
         <file>img/Stroop_test/words/greenWord.JPG</file>
         <file>img/Stroop_test/words/redWord.JPG</file>
         <file>img/Stroop_test/words/yellowWord.JPG</file>
+        <file>img/logo_ut.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

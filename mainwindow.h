@@ -16,6 +16,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    QString userID;
+    void initialize();
+
 protected:
     bool eventFilter(QObject* obj, QEvent* event);
 
