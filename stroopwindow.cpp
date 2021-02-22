@@ -21,10 +21,7 @@ StroopWindow::StroopWindow(QWidget *parent) :
     this->installEventFilter(this);
     ui->pushButton_quit->installEventFilter(this);
 
-    // Savefile directory
-    QDateTime dt = QDateTime::currentDateTime();
-    saveFile = QDir::currentPath() + "/data/" +
-            dt.toString("yyyyMMddhhmm") + "_stroop.csv";
+
 
     // Accept inputs
     acceptArrows = false;
@@ -50,7 +47,7 @@ bool StroopWindow::eventFilter(QObject* obj, QEvent* event)
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 
     // if waiting for start
-    if (waitForKey)
+    if (waitForKey && keyEvent->key() == Qt::Key_Enter)
     {
         waitForKey = false;
         countDown();
@@ -75,7 +72,8 @@ bool StroopWindow::eventFilter(QObject* obj, QEvent* event)
                 saveResult(testMode,
                            answeredArrow,
                            stroopMain->targetColorName,
-                           timer.elapsed());
+                           timer.elapsed(),
+                           timerAll.elapsed());
                 acceptArrows = true;
                 return true;
             }
@@ -84,7 +82,8 @@ bool StroopWindow::eventFilter(QObject* obj, QEvent* event)
                 saveResult(testMode,
                            answeredArrow,
                            stroopMain->targetColorName,
-                           timer.elapsed());
+                           timer.elapsed(),
+                           timerAll.elapsed());
                 stroopSession();
                 return true;
             }
@@ -114,6 +113,22 @@ void StroopWindow::resizeEvent(QResizeEvent *event)
 }
 
 void StroopWindow::startSession()
+{
+    ui->label_pic->setPixmap(pix.scaled(ui->label_pic->width(),
+                                        ui->label_pic->height(),
+                                        Qt::KeepAspectRatio));
+    // Savefile directory
+    QDateTime dt = QDateTime::currentDateTime();
+    qDebug() << userID;
+    saveFile = QDir::currentPath() + "/data/" + userID + "_" +
+            dt.toString("yyyyMMddhhmm") + "_stroop.csv";
+
+    timerAll.start();
+    startSessionStroop();
+
+}
+
+void StroopWindow::startSessionStroop()
 {
     ui->label_pic->setPixmap(pix.scaled(ui->label_pic->width(),
                                         ui->label_pic->height(),
@@ -161,6 +176,8 @@ void StroopWindow::changeMode() {
         pixRule = stroopMain->pixInstructionWord;
     } else if (testMode==2) {
         pixRule = stroopMain->pixInstructionCword;
+    } else if (testMode==3) {
+        pixRule = stroopMain->pixInstructionWord;
     }
 
     // Set instruction image
@@ -172,6 +189,7 @@ void StroopWindow::changeMode() {
 
     // Start settsion
     QThread::msleep(3000);
+    timerSession.start();
     stroopSession();
 
 }
@@ -179,19 +197,47 @@ void StroopWindow::changeMode() {
 void StroopWindow::stroopSession()
 {
     // Check session number
+    /*
     if (countPixShown==0) {
         //initialize
         countPixShown=numPixShow;
         switch (testMode) {
                 case 0:
                     testMode = 1;
-                    startSession();
+                    startSessionStroop();
                     break;
                 case 1:
                     testMode = 2;
-                    startSession();
+                    startSessionStroop();
                     break;
                 case 2:
+                    testMode = 3;
+                    startSessionStroop();
+                    break;
+                case 3:
+                    close();
+                    break;
+                default:
+                    break;
+            }
+    }
+    */
+    if (timerSession.elapsed()>45000) {
+        //initialize
+        switch (testMode) {
+                case 0:
+                    testMode = 1;
+                    startSessionStroop();
+                    break;
+                case 1:
+                    testMode = 2;
+                    startSessionStroop();
+                    break;
+                case 2:
+                    testMode = 3;
+                    startSessionStroop();
+                    break;
+                case 3:
                     close();
                     break;
                 default:
@@ -226,13 +272,18 @@ bool StroopWindow::checkInput(QString pixName, QString color)
 void StroopWindow::saveResult(int rule,
                               QString pixName,
                               QString arrow,
-                              qint64 reactionTime)
+                              qint64 reactionTime,
+                              qint64 overallTime)
 {
     QFile data(saveFile);
     if(data.open(QFile::WriteOnly |QIODevice::Append))
     {
         QTextStream output(&data);
-        output << rule << "," << pixName << "," << arrow << "," << reactionTime << "\n";
+        output << rule << ","
+               << pixName << ","
+               << arrow << ","
+               << reactionTime << ","
+               << overallTime << "\n";;
     }
 }
 

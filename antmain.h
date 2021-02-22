@@ -9,7 +9,7 @@ class ANTMain
 {
 public:
     ANTMain();
-    QStringList loadImagesets(QString dirName);
+
     void initializeImages();
     void choosePix();
 
@@ -17,14 +17,16 @@ public:
     QPixmap pixCue;
     QPixmap pixArrow;
 
-    QString targetArrowName;
-    QString targetCueName;
+    int pixIdxCue;
+    int pixIdxArrow;
+    QString correctArrow;
+
+    QVector<QPixmap> imagePathsArrow;
+    QVector<QPixmap> imagePathsCue;
 
     bool pixChosen;
 
 private:
-    QStringList imagePathsArrow;
-    QStringList imagePathsCue;
 
 };
 
