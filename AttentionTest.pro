@@ -10,25 +10,31 @@ CONFIG += c++11
 
 SOURCES += \
     antmain.cpp \
+    anttutorial.cpp \
     antwindow.cpp \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
     stroopmain.cpp \
+    strooptutorial.cpp \
     stroopwindow.cpp
 
 HEADERS += \
     antmain.h \
+    anttutorial.h \
     antwindow.h \
     logindialog.h \
     mainwindow.h \
     stroopmain.h \
+    strooptutorial.h \
     stroopwindow.h
 
 FORMS += \
+    anttutorial.ui \
     antwindow.ui \
     logindialog.ui \
     mainwindow.ui \
+    strooptutorial.ui \
     stroopwindow.ui
 
 # Default rules for deployment.

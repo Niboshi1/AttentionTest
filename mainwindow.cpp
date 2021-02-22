@@ -68,6 +68,18 @@ void MainWindow::on_pushButton_stroop_clicked()
     stroopWindow->startSession();
 }
 
+void MainWindow::on_pushButton_stroop_tutorial_clicked()
+{
+    stroopTutorial = new StroopTutorial(this);
+    stroopTutorial->showFullScreen();
+}
+
+void MainWindow::on_pushButton_ant_tutorial_clicked()
+{
+    antTutorial = new ANTTutorial(this);
+    antTutorial->showFullScreen();
+}
+
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 {
     if(event->type() != QEvent::KeyPress) return false;
@@ -80,5 +92,3 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
         return false;
     }
 }
-
-

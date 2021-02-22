@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "antwindow.h"
 #include "stroopwindow.h"
+#include "anttutorial.h"
+#include "strooptutorial.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,9 +30,15 @@ private slots:
 
     void on_pushButton_stroop_clicked();
 
+    void on_pushButton_stroop_tutorial_clicked();
+
+    void on_pushButton_ant_tutorial_clicked();
+
 private:
     Ui::MainWindow *ui;
     ANTWindow *antWindow;
     StroopWindow *stroopWindow;
+    ANTTutorial *antTutorial;
+    StroopTutorial *stroopTutorial;
 };
 #endif // MAINWINDOW_H

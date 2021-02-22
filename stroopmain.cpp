@@ -26,6 +26,7 @@ void StroopMain::initializeImages()
     imagePathsPatch = loadImagesets(":/resources/img/Stroop_test/colorPatch");
     imagePathsWords = loadImagesets(":/resources/img/Stroop_test/words");
     imagePathsCwords = loadImagesets(":/resources/img/Stroop_test/colorWords");
+    imagePathsCwords2 = loadImagesets(":/resources/img/Stroop_test/colorWords2");
     pixInstructionColor = QPixmap(":/resources/img/Stroop_test/instruction/answer_color.JPG");
     pixInstructionWord = QPixmap(":/resources/img/Stroop_test/instruction/answer_word.JPG");
     pixInstructionCword = QPixmap(":/resources/img/Stroop_test/instruction/answer_cword.JPG");
@@ -41,6 +42,8 @@ void StroopMain::choosePix(int testmode)
         colorPixFile = imagePathsWords;
     } else if (testmode==2) {
         colorPixFile = imagePathsCwords;
+    } else if (testmode==3) {
+        colorPixFile = imagePathsCwords2;
     }
 
     // Get random cue

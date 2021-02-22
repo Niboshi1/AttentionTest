@@ -47,7 +47,7 @@ bool ANTWindow::eventFilter(QObject* obj, QEvent* event)
     if(event->type() != QEvent::KeyPress) return false;
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
     // if waiting for start
-    if (waitForKey)
+    if (waitForKey && keyEvent->key() == Qt::Key_Enter)
     {
         waitForKey = false;
         countDown();

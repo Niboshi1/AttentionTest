@@ -50,6 +50,56 @@
         <file>img/Stroop_test/words/redWord.JPG</file>
         <file>img/Stroop_test/words/yellowWord.JPG</file>
         <file>img/logo_ut.png</file>
+        <file>img/ANT_test_guide/Slide1.JPG</file>
+        <file>img/ANT_test_guide/Slide2.JPG</file>
+        <file>img/ANT_test_guide/Slide3.JPG</file>
+        <file>img/ANT_test_guide/Slide4.JPG</file>
+        <file>img/ANT_test_guide/Slide5.JPG</file>
+        <file>img/ANT_test_guide/Slide6.JPG</file>
+        <file>img/ANT_test_guide/Slide7.JPG</file>
+        <file>img/ANT_test_guide/Slide8.JPG</file>
+        <file>img/ANT_test_guide/Slide9.JPG</file>
+        <file>img/ANT_test_guide/Slide10.JPG</file>
+        <file>img/ANT_test_guide/Slide11.JPG</file>
+        <file>img/ANT_test_guide/Slide12.JPG</file>
+        <file>img/ANT_test_guide/Slide13.JPG</file>
+        <file>img/ANT_test_guide/Slide14.JPG</file>
+        <file>img/ANT_test_guide/Slide15.JPG</file>
+        <file>img/ANT_test_guide/Slide16.JPG</file>
+        <file>img/ANT_test_guide/Slide17.JPG</file>
+        <file>img/Stroop_test_guide/Slide1.JPG</file>
+        <file>img/Stroop_test_guide/Slide2.JPG</file>
+        <file>img/Stroop_test_guide/Slide3.JPG</file>
+        <file>img/Stroop_test_guide/Slide4.JPG</file>
+        <file>img/Stroop_test_guide/Slide5.JPG</file>
+        <file>img/Stroop_test_guide/Slide6.JPG</file>
+        <file>img/Stroop_test_guide/Slide7.JPG</file>
+        <file>img/Stroop_test_guide/Slide8.JPG</file>
+        <file>img/Stroop_test_guide/Slide9.JPG</file>
+        <file>img/Stroop_test_guide/Slide10.JPG</file>
+        <file>img/Stroop_test_guide/Slide11.JPG</file>
+        <file>img/Stroop_test_guide/Slide12.JPG</file>
+        <file>img/Stroop_test_guide/Slide13.JPG</file>
+        <file>img/Stroop_test_guide/Slide14.JPG</file>
+        <file>img/Stroop_test_guide/Slide15.JPG</file>
+        <file>img/Stroop_test_guide/Slide16.JPG</file>
+        <file>img/Stroop_test_guide/Slide17.JPG</file>
+        <file>img/Stroop_test/colorWords2/Bbluecword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Bgreencword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Bredcword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Byellowcword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Gbluecword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Ggreencword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Gredcword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Gyellowcword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Rbluecword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Rgreencword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Rredcword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Ryellowcword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Ybluecword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Ygreencword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Yredcword.JPG</file>
+        <file>img/Stroop_test/colorWords2/Yyellowcword.JPG</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

@@ -47,7 +47,7 @@ bool StroopWindow::eventFilter(QObject* obj, QEvent* event)
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 
     // if waiting for start
-    if (waitForKey)
+    if (waitForKey && keyEvent->key() == Qt::Key_Enter)
     {
         waitForKey = false;
         countDown();
@@ -176,6 +176,8 @@ void StroopWindow::changeMode() {
         pixRule = stroopMain->pixInstructionWord;
     } else if (testMode==2) {
         pixRule = stroopMain->pixInstructionCword;
+    } else if (testMode==3) {
+        pixRule = stroopMain->pixInstructionWord;
     }
 
     // Set instruction image
@@ -187,6 +189,7 @@ void StroopWindow::changeMode() {
 
     // Start settsion
     QThread::msleep(3000);
+    timerSession.start();
     stroopSession();
 
 }
@@ -194,6 +197,7 @@ void StroopWindow::changeMode() {
 void StroopWindow::stroopSession()
 {
     // Check session number
+    /*
     if (countPixShown==0) {
         //initialize
         countPixShown=numPixShow;
@@ -207,6 +211,33 @@ void StroopWindow::stroopSession()
                     startSessionStroop();
                     break;
                 case 2:
+                    testMode = 3;
+                    startSessionStroop();
+                    break;
+                case 3:
+                    close();
+                    break;
+                default:
+                    break;
+            }
+    }
+    */
+    if (timerSession.elapsed()>45000) {
+        //initialize
+        switch (testMode) {
+                case 0:
+                    testMode = 1;
+                    startSessionStroop();
+                    break;
+                case 1:
+                    testMode = 2;
+                    startSessionStroop();
+                    break;
+                case 2:
+                    testMode = 3;
+                    startSessionStroop();
+                    break;
+                case 3:
                     close();
                     break;
                 default:

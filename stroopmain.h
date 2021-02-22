@@ -25,6 +25,7 @@ private:
     QStringList imagePathsPatch;
     QStringList imagePathsWords;
     QStringList imagePathsCwords;
+    QStringList imagePathsCwords2;
 };
 
 #endif // STROOPMAIN_H

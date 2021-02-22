@@ -29,13 +29,13 @@ void LoginDialog::on_pushButton_clicked()
 
         switch (ret) {
         case QMessageBox::Yes:
-            // No was clicked
+            // Yes was clicked
             hide();
             mainWindow = new MainWindow(this);
             mainWindow->userID = userID;
             mainWindow->initialize();
             mainWindow->show();
-              break;
+            break;
         case QMessageBox::No:
             // No was clicked
             break;

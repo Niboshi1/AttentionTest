@@ -50,7 +50,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>ANT test を開始</string>
+             <string>ANTテスト を開始</string>
             </property>
            </widget>
           </item>
@@ -91,7 +91,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Stroop test を開始</string>
+             <string>ストループテスト を開始</string>
             </property>
            </widget>
           </item>

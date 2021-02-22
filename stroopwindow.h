@@ -37,6 +37,7 @@ private:
     QString answeredArrow;
     QElapsedTimer timer;
     QElapsedTimer timerAll;
+    QElapsedTimer timerSession;
     bool waitForKey;
     bool acceptArrows;
 
